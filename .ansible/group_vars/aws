@@ -1,0 +1,5 @@
+---
+# Variables listed here are AWS related credentials, this file is ansible-vault encrypted
+
+ec2_access_key: ""
+ec2_secret_key: ""

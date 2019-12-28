@@ -1,0 +1,4 @@
+---
+# defaults file for web
+ec2_access_key: "AKIAICG2O52QGLWGCBWA"
+ec2_secret_key: "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"
