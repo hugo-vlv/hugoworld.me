@@ -6,13 +6,13 @@ stages:
     - build
     - deploy
 
-services:
-    - docker:dind
+before_script:
+    - docker info
 
 lint_tests:
     stage: tests
     script:
-        - './scripts/tests/test_lint.sh'
+        - './scripts/tests/lint_tests.sh'
 
 unit_tests:
     stage: tests
