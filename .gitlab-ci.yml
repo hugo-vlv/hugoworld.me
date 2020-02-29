@@ -11,9 +11,6 @@ stages:
     - build
     - deploy
 
-before_script:
-    - docker info
-
 lint_tests:
     stage: tests
     script:
@@ -21,6 +18,8 @@ lint_tests:
 
 unit_tests:
     stage: tests
+    before_script:
+        - docker info
     script:
         - './scripts/tests/unit_tests.sh'
 
