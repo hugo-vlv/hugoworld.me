@@ -1,5 +1,6 @@
 variables:
-    DOCKER_IMAGE: tkwlive-${CI_COMMIT_REF_NAME}:latest
+    DOCKER_IMAGE: registry.gitlab.com/krakcen/hugoworld-me
+
 stages:
     - tests
     - build
@@ -13,9 +14,9 @@ lint_tests:
     script:
         - './scripts/tests/test_lint.sh'
 
-units_tests:
+unit_tests:
     stage: tests
-    scripts:
+    script:
         - './scripts/tests/unit_tests.sh'
 
 build:
@@ -30,8 +31,6 @@ build:
 deploy:
     image: alpine:latest
     stage: deploy
-    environment:
-        PROTO_ENV: "PROTO_ENV"
     variables:
         PROTO_VAR: 'PROTO_VAR'
     before_script:
