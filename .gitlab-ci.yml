@@ -1,15 +1,22 @@
-image: docker:git
-
-services:
-    - docker:dind
-
 variables:
     DOCKER_IMAGE: registry.gitlab.com/krakcen/hugoworld-me
 
 stages:
-    - tests
     - build
+    - tests
     - deploy
+
+build:
+    image: docker:git
+    stage: build
+    services:
+        - docker:dind
+    before_script:
+        - './scripts/build/before-build.sh'
+    script:
+        - './scripts/build/build.sh'
+    only:
+        - master
 
 lint_tests:
     stage: tests
@@ -17,20 +24,14 @@ lint_tests:
         - './scripts/tests/lint_tests.sh'
 
 unit_tests:
+    image: docker:git
     stage: tests
+    services:
+        - docker:dind
     before_script:
         - docker info
     script:
         - './scripts/tests/unit_tests.sh'
-
-build:
-    stage: build
-    before_script:
-        - './scripts/build/before-build.sh'
-    script:
-        - './scripts/build/build.sh'
-    only:
-        - master
 
 deploy:
     image: alpine:latest
