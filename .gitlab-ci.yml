@@ -1,3 +1,5 @@
+image: python:3.7.4
+
 variables:
     DOCKER_IMAGE: registry.gitlab.com/krakcen/hugoworld-me
 
