@@ -1,4 +1,6 @@
 {
+  "name": "hugoworld.me",
+  "version": "0.1.0",
   "dependencies": {
     "next": "^9.1.6",
     "react": "^16.12.0",

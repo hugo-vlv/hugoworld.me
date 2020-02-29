@@ -1,3 +1,3 @@
 import * as React from "react";
 
-export default props => <div>Hello World</div>;
+export default () => <div>Hello World Hugo</div>;

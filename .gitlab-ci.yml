@@ -1,0 +1,42 @@
+variables:
+    DOCKER_IMAGE: tkwlive-${CI_COMMIT_REF_NAME}:latest
+stages:
+    - tests
+    - build
+    - deploy
+
+services:
+    - docker:dind
+
+lint_tests:
+    stage: tests
+    script:
+        - './scripts/tests/test_lint.sh'
+
+units_tests:
+    stage: tests
+    scripts:
+        - './scripts/tests/unit_tests.sh'
+
+build:
+    stage: build
+    before_script:
+        - './scripts/build/before-build.sh'
+    script:
+        - './scripts/build/build.sh'
+    only:
+        - master
+
+deploy:
+    image: alpine:latest
+    stage: deploy
+    environment:
+        PROTO_ENV: "PROTO_ENV"
+    variables:
+        PROTO_VAR: 'PROTO_VAR'
+    before_script:
+        - ./scripts/deploy/before-deploy-production.sh
+    script:
+        - ./scripts/deploy/deploy-production.sh
+    only:
+        - master
