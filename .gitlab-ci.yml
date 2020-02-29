@@ -1,4 +1,7 @@
-image: python:3.7.4
+image: docker:git
+
+services:
+    - docker:dind
 
 variables:
     DOCKER_IMAGE: registry.gitlab.com/krakcen/hugoworld-me
